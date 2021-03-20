@@ -1,0 +1,20 @@
+.login{
+    background-color: #fdcb6e;
+    height: 100vh;
+}
+.form{
+    /* border: 1px solid gray; */
+    border-radius: 5px;
+    margin: 100px auto;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0px 5px 10px gray;
+}
+.form input {
+    width: 80%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 10px;
+    border-radius: 10px;
+}

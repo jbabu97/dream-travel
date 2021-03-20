@@ -1,0 +1,11 @@
+.bg_img img{
+    /* height: 100vh; */
+    width: 100%;
+    object-fit: cover;
+}
+.home_compo{
+    background-image: url(../../images/Bg.png);
+    /* background-size:contain; */
+    height: 100vh;
+}
+
