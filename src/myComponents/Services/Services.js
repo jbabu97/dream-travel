@@ -11,14 +11,12 @@ const Services = (props) => {
         history.push('/destination');
     }
     return (
-        <div>
-            <div onClick={handleLogin} className="services">
-                <div className="col-sm-3 service">
+            <div onClick={handleLogin} className="col-sm-3 services">
+                <div className="service">
                     <img className="img-fluid" src={img} alt=""/>
                     <h3>{serviceName}</h3>
                 </div>
             </div>
-        </div>
     );
 };
 

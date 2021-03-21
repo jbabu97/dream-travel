@@ -1,11 +1,14 @@
-.bg_img img{
-    /* height: 100vh; */
-    width: 100%;
-    object-fit: cover;
-}
 .home_compo{
     background-image: url(../../images/Bg.png);
-    /* background-size:contain; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
     height: 100vh;
+}
+.home_detail{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 

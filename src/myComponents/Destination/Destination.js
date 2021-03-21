@@ -3,14 +3,16 @@ import './Destination.css';
 import Map from '../../images/Map.png';
 import Header from '../Header/Header';
 import DestinationDetails from '../DestinationDetails/DestinationDetails';
-import services from '../../travelData/travelData';
+import travelData from '../../travelData/travelData';
+import { useParams } from 'react-router';
 
 const Destination = () => {
+    const {ride} = useParams()
     const [destination, setDestination] = useState([])
 
     useEffect(() => {
-        setDestination(services);
-    }, [])
+        setDestination(travelData);
+    }, [ride])
     return (
         <div>
             <Header></Header>

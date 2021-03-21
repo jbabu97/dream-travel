@@ -150,7 +150,7 @@ const Login = () => {
       <Header></Header>
       <h4>{customer.name}</h4>
       {/* <h4>{loggedInCustomer.name}</h4> */}
-      <div className=" col-sm-5 form">
+      <div className="col-sm-5 form">
         {
             newCustomer ? <h2> Create an account</h2> : <h2>Login</h2>
         }

@@ -16,15 +16,10 @@ const Home = () => {
     return (
         <div className="container home_compo">
             <Header></Header>
-            <div className="bg_img">
-                {/* <img src={BgImg} alt=""/> */}
-            </div>
             <div className="home_detail">
-            <div className="row">
                 {
                     services.map(service => <Services service={service}></Services>)
                 }
-            </div>
             </div>
         </div>
     );
