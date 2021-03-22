@@ -2,18 +2,27 @@ import React, { useContext, useState } from "react";
 import "./Login.css";
 import firebase from "firebase/app";
 import "firebase/auth";
-import firebaseConfig from "../../firebase.config";
+// import firebaseConfig from "../../firebase.config";
 import Header from "../Header/Header";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { CustomerContext } from "../../App";
+import { initializeLoginFramework, handleGoogleLogin, handleLogOut, logInWithEmailAndPassword, resetPassword } from './LoginManager';
 
-if (firebase.apps.length === 0) {
-  firebase.initializeApp(firebaseConfig);
-}
+// if (firebase.apps.length === 0) {
+//   firebase.initializeApp(firebaseConfig);
+// }
 
 const Login = () => {
+
+  const [loggedInCustomer, setLoggedInCustomer] = useContext(CustomerContext);
+  const history = useHistory();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/" } };
+
+  const [newCustomer, setNewCustomer] = useState( false );
+
   const [customer, setCustomer] = useState({
-    isLoggedIn: false,
+    isSignedIn: false,
     name: "",
     email: "",
     password: "",
@@ -21,39 +30,32 @@ const Login = () => {
     success: true,
   });
 
-  const history = useHistory();
-  const location = useLocation();
+    
+  initializeLoginFramework();
 
-  const { from } = location.state || { from: { pathname: "/" } };
+  const googleLogin = () => {
+    handleGoogleLogin()
+    .then(res => {
+      handleResponse(res, true)
+    })
+  }
 
-  const [loggedInCustomer, setLoggedInCustomer] = useContext(CustomerContext);
-
-  const [newCustomer, setNewCustomer] = useState( false );
-
-  const handleFacebookLogin = () => {
-    console.log("facebook clicked");
-    const facebookProvider = new firebase.auth.FacebookAuthProvider();
-
-    firebase
-      .auth()
-      .signInWithPopup(facebookProvider)
-      .then((res) => {
-        const { displayName, email } = res.user;
-        const isLoggedIn = {
-            isLoggedIn: true,
-            name: displayName,
-            email: email
-          }
-        setCustomer(isLoggedIn);
+  const handleResponse = (res, redirect) =>{
+    setCustomer(res);
+    setLoggedInCustomer(res);
+    if(redirect){
         history.replace(from);
-        console.log(isLoggedIn);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setCustomer(errorMessage);
-        console.log(errorMessage);
-      });
-  };
+    }
+};
+
+const logOut = () => {
+    handleLogOut()
+    .then(res => {
+      handleResponse(res, false);
+    })
+};
+
+  
 
   const handleBlur = (event) => {
     console.log(event.target.name, event.target.value);
@@ -77,80 +79,19 @@ const Login = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-
     if (newCustomer && customer.email && customer.password) {
-      // user create
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(customer.email, customer.password)
-        .then((res) => {
-          console.log(res);
-          const newCustomerInfo = { ...customer };
-          newCustomerInfo.error = "";
-          newCustomerInfo.success = true;
-          setCustomer(newCustomerInfo);
-          updateCustomerName(customer.name);
+        logInWithEmailAndPassword(customer.email, customer.password)
+        .then(res => {
+          handleResponse(res, true);
         })
-        .catch((error) => {
-          const newCustomerInfo = { ...customer };
-          newCustomerInfo.error = error.message;
-          newCustomerInfo.success = false;
-          setCustomer(newCustomerInfo);
-        });
-      console.log("sign in");
     }
-    // customer login
-    if (!newCustomer && customer.email && customer.password) {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(customer.email, customer.password)
-        .then((res) => {
-          console.log(res);
-          const newCustomerInfo = { ...customer };
-          newCustomerInfo.error = "";
-          newCustomerInfo.success = true;
-          setCustomer(newCustomerInfo);
-          setLoggedInCustomer(newCustomerInfo);
-          history.replace(from);
-        })
-        .catch((error) => {
-          const newCustomerInfo = { ...customer };
-          newCustomerInfo.error = error.message;
-          newCustomerInfo.success = false;
-          setCustomer(newCustomerInfo);
-        });
-      console.log("sign up");
-    }
-  };
-
-  const updateCustomerName = name => {
-    const customer = firebase.auth().currentUser;
-
-    customer.updateProfile({
-      displayName: name
-    }).then(function() {
-          console.log('Update successful.');
-          const newCustomerInfo = { ...customer };
-          newCustomerInfo.error = "";
-          newCustomerInfo.success = true;
-          setCustomer(newCustomerInfo);
-    }).catch(function(error) {
-          console.log(error);
-          const newCustomerInfo = { ...customer };
-          newCustomerInfo.error = error.message;
-          newCustomerInfo.success = false;
-          setCustomer(newCustomerInfo);
-    });
-
+    event.preventDefault();
   };
 
   return (
     <div className="login">
       <Header></Header>
-      <h4>{customer.name}</h4>
-      {/* <h4>{loggedInCustomer.name}</h4> */}
-      <div className="col-sm-5 form">
+      <div className="container col-sm-5 form">
         {
             newCustomer ? <h2> Create an account</h2> : <h2>Login</h2>
         }
@@ -220,14 +161,22 @@ const Login = () => {
           </p>
           }
         </form>
+
+        <div className="d-flex justify-content-center">
+            <div style={{borderTop: '1px solid gray', width:'48%'}}></div>
+            <p style={{marginTop:'-13px'}}>or</p>
+            <div style={{borderTop:'1px solid gray', width:'48%'}}></div>
+        </div>
+
         <div>
           <button
-            onClick={handleFacebookLogin}
+            onClick={googleLogin}
             className="btn btn-outline-success"
           >
-            Go with Facebook
+            Go with Google
           </button>
         </div>
+        <p style={{color: 'red', textAlign:'center'}}>{customer.error}</p>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 .service{
-    background-color: #218838;
+    background-color: #62f181;
     padding: 15px;
     cursor: pointer;
     margin-top: 20px;
@@ -13,5 +13,5 @@
 .service h3{
     color: white;
     text-align: center;
-    margin-top: 20px;
+    margin: 10px;
 }

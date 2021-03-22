@@ -1,9 +1,43 @@
 .destination_detail{
     background-color: #EFEFEF;
     border-radius: 10px;
+    padding: 20px 0;
 }
 .destination_detail input{
     border: none;
     border-radius: 5px;
     width: 100%;
+}
+.ride_details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 20px;
+    height: 100px;
+}
+.ride_details img{
+    width: 70px;
+    margin-left: 10px;
+}
+.ride_details h6{
+    width: 150px;
+    text-align: center;
+    /* line-height: 100px; */
+}
+.ride_info{
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+}
+.destination{
+    background-color: lightcoral;
+    border-radius: 10px;
+    padding: 20px;
+}
+.route{
+    padding: 10px 20px;
+    background-color: #cad1cc;
+    border-radius: 10px;
 }

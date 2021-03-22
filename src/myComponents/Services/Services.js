@@ -1,22 +1,19 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import './Services.css'
 
 
 const Services = (props) => {
-    const {serviceName, img} = props.service;
+    const {serviceName, img, id} = props.service;
 
-    const history = useHistory();
-    const handleLogin = () => {
-        history.push('/destination');
-    }
     return (
-            <div onClick={handleLogin} className="col-sm-3 services">
+            <Link to={`/destination/id`} className="col-sm-3 services">
                 <div className="service">
                     <img className="img-fluid" src={img} alt=""/>
-                    <h3>{serviceName}</h3>
+                    <h3>{serviceName} Booking</h3>
                 </div>
-            </div>
+            </Link>
     );
 };
 
