@@ -13,7 +13,9 @@ const Destination = () => {
     console.log(serviceId);
     const [destination, setDestination] = useState([]);
 
-    const service = travelData.filter(service => service.id === serviceId)
+    const [rideInfo, setRideInfo] = useState(true)
+
+    const service = travelData.find(service => service.id == serviceId)
     console.log(service);
 
     useEffect(() => {
@@ -29,8 +31,9 @@ const Destination = () => {
 
     }
 
-    const handleSubmit = () => {
-        
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setRideInfo(false);
     }
 
     const isForm = true;
@@ -39,35 +42,38 @@ const Destination = () => {
             <Header></Header>
             <div className="row">
                 <div className="col-sm-5 mt-3">
-                    <div className="p-4 mx-auto destination_detail">
-                        <form onSubmit={handleSubmit}>
-                            <h4>From</h4>
-                            <p><input onBlur={handleBlur} type="text" name="start" /></p>
-                            <h4>To</h4>
-                            <p><input onBlur={handleBlur} type="text" name="end" /></p>
-                            <p><input onClick={handleDestination} className="btn btn-success" type="submit" value="Search" /></p>
-                        </form>                        
-                    </div>
-                    
-                    <div className="destination">
-                        <div className="route">
-                            <h2>Start</h2>
-                            <p>to</p>
-                            <h2>End</h2>
-                        </div>
+                    {
+                        rideInfo ?
+                        <div className="p-4 mx-auto destination_detail">
+                            <form onSubmit={handleSubmit}>
+                                <h4>From</h4>
+                                <p><input onBlur={handleBlur} type="text" name="start" /></p>
+                                <h4>To</h4>
+                                <p><input onBlur={handleBlur} type="text" name="end" /></p>
+                                <p><input className="btn btn-success" type="submit" value="Search" /></p>
+                            </form>                        
+                        </div> : 
+                        <div className="destination">
+                            <div className="route">
+                                <h2>Start</h2>
+                                <p>to</p>
+                                <h2>End</h2>
+                            </div>
                         <div>
+                                    { service.rideDetails.map((s,i) => (
                                     <div className="ride_details">
                                         <div>
-                                            <img src={service.carImg} alt=""/>
+                                            <img src={s.carImg} alt=""/>
                                         </div>
                                         <div className="ride_info">
-                                            <h6><FontAwesomeIcon icon={faUserFriends}/> {service.seats}</h6>
-                                            <h6><p>{service.fare}</p></h6>
+                                            <h6><FontAwesomeIcon icon={faUserFriends}/> {s.seats}</h6>
+                                            <h6><p>{s.fare}</p></h6>
                                         </div>
-                                    </div>
+                                    </div>))}
                                                               
                         </div>
                     </div>
+                    }                    
                 </div>
                 <div className="col-sm-7 mt-3">
                     <img className="img-fluid" src={Map} alt=""/>

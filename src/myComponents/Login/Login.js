@@ -79,7 +79,7 @@ const logOut = () => {
   };
 
   const handleSubmit = (event) => {
-    if (newCustomer && customer.email && customer.password) {
+    if (customer.email && customer.password) {
         logInWithEmailAndPassword(customer.email, customer.password)
         .then(res => {
           handleResponse(res, true);
