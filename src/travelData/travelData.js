@@ -1,4 +1,4 @@
-const travelData = [{"serviceName":"Bike","img":"https://i.ibb.co/S3YF4pz/bike.jpg", "id": 1, "rideDetails": [{"carImg": "https://i.ibb.co/S3YF4pz/bike.jpg", "seats": 1, "fare": "$ 20"},{"carImg": "https://i.ibb.co/S3YF4pz/bike.jpg", "seats": 1, "fare": "$ 20"}, {"carImg": "https://i.ibb.co/S3YF4pz/bike.jpg", "seats": 1, "fare": "$ 20"}]},
+const travelData = [{"serviceName":"Bike","img":"https://i.ibb.co/S3YF4pz/bike.jpg", "id": 1, "rideDetails": [{"carImg": "https://i.ibb.co/S3YF4pz/bike.jpg", "seats": 1, "fare": "$ 20"},{"carImg": "https://i.ibb.co/S3YF4pz/bike.jpg", "seats": 1, "fare": "$ 30"}, {"carImg": "https://i.ibb.co/S3YF4pz/bike.jpg", "seats": 1, "fare": "$ 40"}]},
 
 {"serviceName":"Car","img":"https://i.ibb.co/p0b71h4/car.jpg", "id": 2, "rideDetails": [{"carImg": "https://i.ibb.co/5LCsDqh/car.png", "seats": 4, "fare": "$ 30"}, {"carImg": "https://i.ibb.co/5LCsDqh/car.png", "seats": 4, "fare": "$ 40"}, {"carImg": "https://i.ibb.co/5LCsDqh/car.png", "seats": 4, "fare": "$ 50"}]}, 
 

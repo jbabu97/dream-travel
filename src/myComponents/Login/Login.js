@@ -1,16 +1,11 @@
 import React, { useContext, useState } from "react";
 import "./Login.css";
-import firebase from "firebase/app";
 import "firebase/auth";
-// import firebaseConfig from "../../firebase.config";
 import Header from "../Header/Header";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { CustomerContext } from "../../App";
-import { initializeLoginFramework, handleGoogleLogin, handleLogOut, logInWithEmailAndPassword, resetPassword } from './LoginManager';
-
-// if (firebase.apps.length === 0) {
-//   firebase.initializeApp(firebaseConfig);
-// }
+import { initializeLoginFramework, handleGoogleLogin, logInWithEmailAndPassword} from './LoginManager';
+import GoogleIcon from '../../images/google.png';
 
 const Login = () => {
 
@@ -48,44 +43,32 @@ const Login = () => {
     }
 };
 
-const logOut = () => {
-    handleLogOut()
-    .then(res => {
-      handleResponse(res, false);
-    })
-};
 
-  
-
-  const handleBlur = (event) => {
-    console.log(event.target.name, event.target.value);
+  const handleBlur = (e) => {
     let isFieldValid = true;
-    if (event.target.name === "email") {
-      isFieldValid = /\S+@\S+\.\S+/.test(event.target.value);
-      console.log(isFieldValid);
+    if (e.target.name === "email") {
+      isFieldValid = /\S+@\S+\.\S+/.test(e.target.value);
     }
-    if (event.target.name === "password") {
-      const isPasswordValid = event.target.value.length >= 6;
-      const isPasswordHasNum = /\d{1}/.test(event.target.value);
+    if (e.target.name === "password") {
+      const isPasswordValid = e.target.value.length >= 6;
+      const isPasswordHasNum = /\d{1}/.test(e.target.value);
       isFieldValid = isPasswordValid && isPasswordHasNum;
-      console.log(isFieldValid);
     }
     if (isFieldValid) {
       const newCustomerInfo = { ...customer };
-      newCustomerInfo[event.target.name] = event.target.value;
+      newCustomerInfo[e.target.name] = e.target.value;
       setCustomer(newCustomerInfo);
-      console.log(newCustomerInfo);
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (e) => {
     if (customer.email && customer.password) {
         logInWithEmailAndPassword(customer.email, customer.password)
         .then(res => {
           handleResponse(res, true);
         })
     }
-    event.preventDefault();
+    e.preventDefault();
   };
 
   return (
@@ -171,8 +154,8 @@ const logOut = () => {
         <div>
           <button
             onClick={googleLogin}
-            className="btn btn-outline-success"
-          >
+            className="btn btn-outline-success custom_btn"
+          > <img src={GoogleIcon} alt=""/> 
             Go with Google
           </button>
         </div>

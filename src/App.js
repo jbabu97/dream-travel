@@ -3,11 +3,9 @@ import Home from './myComponents/Home/Home';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Login from './myComponents/Login/Login';
-import Header from './myComponents/Header/Header';
 import Destination from './myComponents/Destination/Destination';
 import { createContext, useState } from 'react';
 import PrivateRoute from './myComponents/PrivateRoute/PrivateRoute';
@@ -21,7 +19,6 @@ function App() {
     <div className="container">
       <CustomerContext.Provider value={[loggedInCustomer, setLoggedInCustomer]}>
         <Router>
-            {/* <Header></Header> */}
             <h3>{loggedInCustomer.name}</h3>
           <Switch>
             <Route path="/home">
@@ -31,6 +28,9 @@ function App() {
               <Contact/>
             </Route>
             <PrivateRoute path="/destination/:serviceId">
+              <Destination />
+            </PrivateRoute>
+            <PrivateRoute path="/destination">
               <Destination />
             </PrivateRoute>
             <Route path="/login">

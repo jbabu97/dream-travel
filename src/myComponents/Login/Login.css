@@ -19,6 +19,13 @@
     border-radius: 10px;
 }
 
-input[type=text], input[type=password], input[type=email] {
+.form input[type=text], input[type=password], input[type=email] {
     background-color: #fdcb6e;
+}
+.custom_btn{
+    width: 80%;
+}
+.custom_btn img{
+    width: 15px;
+    margin-right: 20px;
 }

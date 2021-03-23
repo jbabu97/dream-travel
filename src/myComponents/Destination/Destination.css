@@ -1,7 +1,10 @@
 .destination_detail{
-    background-color: #EFEFEF;
+    background-color: #4d4848;
     border-radius: 10px;
     padding: 20px 0;
+}
+.destination_detail h4{
+    color: white;
 }
 .destination_detail input{
     border: none;
@@ -24,20 +27,27 @@
 .ride_details h6{
     width: 150px;
     text-align: center;
-    /* line-height: 100px; */
 }
 .ride_info{
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
 }
 .destination{
-    background-color: lightcoral;
+    background-color: #4d4848;
     border-radius: 10px;
     padding: 20px;
 }
 .route{
     padding: 10px 20px;
-    background-color: #cad1cc;
+    background-color: tomato;
+    border-radius: 10px;
+}
+.route h2{
+    color: white;
+}
+
+.google_map iframe{
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #4d4848;
     border-radius: 10px;
 }

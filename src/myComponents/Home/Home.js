@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-import BgImg from '../../images/Bg.png';
 import travelData from '../../travelData/travelData';
 import Services from '../Services/Services';
 import Header from '../Header/Header';
