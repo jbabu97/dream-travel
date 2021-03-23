@@ -26,10 +26,10 @@ const Destination = () => {
 
     const handleBlur = (e) => {
         let isTravelRoute = true;
-        if (e.target.name === 'start') {
+        if (e.target.name === 'origin') {
             isTravelRoute = e.target.value;
         }
-        if (e.target.name === 'end') {
+        if (e.target.name === 'destination') {
             isTravelRoute = e.target.value;
         }
 
