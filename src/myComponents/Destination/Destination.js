@@ -63,9 +63,9 @@ const Destination = () => {
                         </div> : 
                         <div className="destination">
                             <div className="route">
-                                <h2>{travelRoute.start}</h2>
+                                <h2>{travelRoute.origin}</h2>
                                 <p>to</p>
-                                <h2>{travelRoute.end}</h2>
+                                <h2>{travelRoute.destination}</h2>
                             </div>
                         <div>
                             { service && service.rideDetails &&
